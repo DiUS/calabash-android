@@ -8,7 +8,7 @@ require 'socket'
 require 'timeout'
 require 'calabash-android/helpers'
 require 'calabash-android/wait_helpers'
-require 'calabash-android/touch_helpers'
+# require 'calabash-android/touch_helpers'
 require 'calabash-android/version'
 require 'calabash-android/env'
 require 'retriable'
@@ -19,7 +19,7 @@ module Calabash module Android
 
 module Operations
   include Calabash::Android::WaitHelpers
-  include Calabash::Android::TouchHelpers
+  # include Calabash::Android::TouchHelpers
 
   def current_activity
     `#{default_device.adb_command} shell dumpsys window windows`.each_line.grep(/mFocusedApp.+[\.\/]([^.\s\/\}]+)/){$1}.first

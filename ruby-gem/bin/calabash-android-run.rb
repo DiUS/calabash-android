@@ -1,4 +1,4 @@
-def calabash_run(app_path = nil)
+def calabash_run(app_path = nil, options = {})
 
   old_runner = "android.test.InstrumentationTestRunner"
   new_rummer = "sh.calaba.instrumentationbackend.CalabashInstrumentationTestRunner"
@@ -25,7 +25,8 @@ def calabash_run(app_path = nil)
 
   STDOUT.sync = true
   arguments = ARGV - ["--no-build"]
-  cmd = "#{RbConfig.ruby} -S cucumber #{arguments.join(" ")} #{env}"
+  cmd = options.include?(:rspec) ? "#{env} rspec #{arguments.join(" ")}" : "#{RbConfig.ruby} -S cucumber #{arguments.join(" ")} #{env}"
+
   log cmd
   exit_code = system(cmd)
 

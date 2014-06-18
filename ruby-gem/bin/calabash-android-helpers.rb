@@ -23,8 +23,10 @@ def print_usage
       resigns the app with the currently configured keystore.
     build <apk>
       builds the test server that will be used when testing the app.
+    run-rspec <apk>
+      runs rspec in the current folder with the environment needed.
     run <apk>
-      runs Cucumber in the current folder with the enviroment needed.
+      runs Cucumber in the current folder with the environment needed.
     version
       prints the gem version
 

@@ -51,6 +51,14 @@ def relative_to_full_path(file_path)
   File.expand_path(file_path)
 end
 
+def parameter_check
+  Env.exit_if_env_not_set_up
+  if ARGV.empty? or not is_apk_file?(ARGV.first)
+    puts "The first parameter must be the path to the apk file."
+    exit 1
+  end
+end
+
 if ARGV.length == 0
   print_usage
 else
@@ -76,14 +84,12 @@ else
         calabash_build(relative_to_full_path(ARGV.shift))
       end
     end
+  when 'run-rspec'
+    parameter_check
+    exit calabash_run(relative_to_full_path(ARGV.shift), :rspec => true)
   when 'run'
-    Env.exit_if_env_not_set_up
-    if ARGV.empty? or not is_apk_file?(ARGV.first)
-      puts "The first parameter must be the path to the apk file."
-      exit 1
-    else
-      exit calabash_run(relative_to_full_path(ARGV.shift))
-    end
+    parameter_check
+    exit calabash_run(relative_to_full_path(ARGV.shift))
   when 'gen'
     calabash_scaffold
   when 'console'
